@@ -1,13 +1,28 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func main() {
-	var n int
-	ans := 0.0
-	fmt.Scan(&n)
-	for i := 1; i <= n; i++ {
-		ans += float64(i) * 10000 / float64(n)
+	targets := "atcoder"
+	ans := "You can win"
+	var s, t string
+	fmt.Scan(&s, &t)
+	cs := []rune(s)
+	ct := []rune(t)
+	for i := 0; i < len(cs); i++ {
+		if cs[i] == ct[i] {
+			continue
+		} else if cs[i] == '@' && strings.Contains(targets, string(ct[i])) {
+			continue
+		} else if ct[i] == '@' && strings.Contains(targets, string(cs[i])) {
+			continue
+		} else {
+			ans = "You will lose"
+			break
+		}
 	}
 	fmt.Println(ans)
 }
